@@ -22,12 +22,6 @@ export function initJustValidate() {
           rule: 'required',
           errorMessage: 'Это обязательноe поле',
         },
-        /* {
-          rule: 'customRegexp',
-          errorMessage: 'Некорректный формат ввода',
-          // Latin & russian letters, numbers, space, hyphen
-          value: /^[A-Za-z0-9А-Яа-яЁё\s\-]+$/gi,
-        }, */
         {
           rule: 'minLength',
           errorMessage: 'Минимум 2 символа',
@@ -49,17 +43,10 @@ export function initJustValidate() {
           rule: 'required',
           errorMessage: 'Это обязательноe поле',
         },
-        /* {
-          rule: 'customRegexp',
-          errorMessage: 'Некорректный формат ввода',
-          // Latin & russian letters, numbers, space,
-          // general punctuation marks, quotes
-          value: /^[A-Za-z0-9А-Яа-яЁё\s\-_.,!?;:'"«»“”‘’()]+$/gi,
-        }, */
         {
           rule: 'minLength',
-          errorMessage: 'Минимум 5 символов',
-          value: 5,
+          errorMessage: 'Минимум 2 символа',
+          value: 2,
         },
         {
           rule: 'maxLength',
@@ -69,14 +56,10 @@ export function initJustValidate() {
       ]);
     });
 
-    const emailFields = form.querySelectorAll('.input-email[required]');
+    const emailFields = form.querySelectorAll('.input-email');
 
     emailFields.forEach((field) => {
       validator.addField(field, [
-        {
-          rule: 'required',
-          errorMessage: 'Это обязательноe поле',
-        },
         {
           rule: 'email',
           errorMessage: 'Некорректный формат e-mail',
@@ -84,64 +67,20 @@ export function initJustValidate() {
       ]);
     });
 
-    const phoneFields = form.querySelectorAll('.input-tel[required]');
+    const fileFields = form.querySelectorAll('.input-file');
 
-    phoneFields.forEach((field) => {
-      validator.addField(field, [
+    fileFields.forEach((file) => {
+      validator.addField(file, [
         {
-          rule: 'required',
-          errorMessage: 'Это обязательноe поле',
-        },
-        {
-          rule: 'customRegexp',
-          errorMessage: 'Некорректный формат номера',
-          // Russian phone number formats + simple 7 digit format
-          value:
-            /^(?:\+?7|8)?[\s-]?(?:\(?(?:9\d{2}|4[6-9]\d|5\d{2}|3[0-8]\d|82\d|8[1-9][0-9])\)?[\s-]?\d{3}[\s-]?\d{2}[\s-]?\d{2}|\d{3}[\s-]?\d{2}[\s-]?\d{2})$/gi,
-        },
-      ]);
-    });
-
-    const passwordFields = form.querySelectorAll('.input-password[required]');
-
-    passwordFields.forEach((field) => {
-      validator.addField(field, [
-        {
-          rule: 'required',
-          errorMessage: 'Это обязательноe поле',
-        },
-        {
-          rule: 'minLength',
-          errorMessage: 'Минимум 8 символов',
-          value: 8,
-        },
-      ]);
-    });
-
-    const checkboxes = form.querySelectorAll('.input-checkbox[required]');
-
-    checkboxes.forEach((checkbox) => {
-      validator.addField(checkbox, [
-        {
-          rule: 'required',
-          errorMessage: 'Это обязательноe поле',
-        },
-      ]);
-    });
-
-    const radioGroups = form.querySelectorAll('.radio-fieldset--required');
-
-    radioGroups.forEach((radioGroup) => {
-      validator.addRequiredGroup(radioGroup, 'Выберите одну из опций');
-    });
-
-    const selects = form.querySelectorAll('select[required]');
-
-    selects.forEach((select) => {
-      validator.addField(select, [
-        {
-          rule: 'required',
-          errorMessage: 'Выберите одну из опций',
+          rule: 'files',
+          value: {
+            files: {
+              extensions: ['jpeg', 'jpg', 'png'],
+              types: ['image/jpeg', 'image/jpg', 'image/png'],
+              maxSize: 10_485_760, // 10 MB
+            },
+          },
+          errorMessage: 'Превышен максимальный размер файла',
         },
       ]);
     });
