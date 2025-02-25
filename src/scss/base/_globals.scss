@@ -40,20 +40,20 @@ html {
   color-scheme: normal;
 
   &.has-scrollbar {
-    overflow-y: scroll;
     // Firefox
     overflow-x: unset;
+    overflow-y: scroll;
   }
 }
 
 body {
-  --text-body-ff: var(--font-montserrat);
-  --text-body-fz: 1.8rem;
+  --text-body-ff: var(--font-inter);
+  --text-body-fz: 1.4rem;
   --text-body-lh: 1.5;
 
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
   min-width: rem($container-min-width);
   min-height: 100%;
   height: auto;
@@ -67,6 +67,9 @@ body {
   // Change oldstyle figures to lining numeric via font feature
   font-variant-numeric: lining-nums;
   @include bp-max($container-min-width) {
+    overflow-x: auto;
+  }
+  @include bp-min(1600px) {
     overflow-x: auto;
   }
 
@@ -100,33 +103,32 @@ h2,
 h3,
 .h3 {
   font-weight: 500;
+  color: var(--color-dark);
 }
 
 h1,
 .h1 {
-  font-size: 3rem;
-}
-
-.h1 {
-  margin-bottom: 1.6rem;
+  font-size: 3.2rem;
+  line-height: normal;
 }
 
 h2,
 .h2 {
   font-size: 2.4rem;
-}
-
-.h2 {
-  margin-bottom: 1.2rem;
+  line-height: normal;
 }
 
 h3,
 .h3 {
-  font-size: 2rem;
+  font-size: 1.6rem;
+  line-height: 1;
 }
 
-.h3 {
-  margin-bottom: 1rem;
+.hgroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-height: 7rem;
 }
 
 .p {
@@ -303,7 +305,7 @@ hr {
   // Add the correct height in Firefox
   height: 0.1rem;
   border: none;
-  background-color: var(--color-black);
+  background-color: var(--color-gray-3);
   // Correct the inheritance of border color in Firefox
   color: inherit;
 }
@@ -311,8 +313,7 @@ hr {
 .hr {
   height: 0.1rem;
   border: none;
-  margin: 2rem 0;
-  background-color: var(--color-black);
+  background-color: var(--color-gray-3);
 }
 
 abbr[title] {

@@ -1,0 +1,81 @@
+/*! Rate component */
+
+@use '../abstracts/' as *;
+
+.rate {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.rate-stars {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 0.3rem;
+  height: 1.8rem;
+}
+
+.rate-star {
+  position: relative;
+
+  input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+  }
+
+  label {
+    width: 2.4rem;
+    height: 2.4rem;
+    color: var(--color-gray-3);
+    cursor: pointer;
+    &:hover {
+      color: var(--color-gray-2);
+    }
+    .icon {
+      font-size: 1.8rem;
+      transition: color var(--transition-medium-cubic);
+    }
+  }
+
+  &:hover ~ .rate-star label {
+    color: var(--color-gray-2);
+  }
+  &:has(input:checked) {
+    & ~ .rate-star label,
+    input:checked ~ label {
+      color: var(--color-orange);
+    }
+  }
+}
+
+/* Rating */
+
+.rating {
+  --bg-size: 100%;
+
+  display: flex;
+  gap: 0.6rem;
+  width: 10.2rem;
+  height: 1.8rem;
+  mask: url('@svg/icons/star.svg');
+  mask-repeat: space;
+  background-image: linear-gradient(to right, var(--color-orange) 0% var(--bg-size), var(--color-gray-3) var(--bg-size) 100%);
+
+  &--4 {
+    --bg-size: 80%;
+  }
+  &--3 {
+    --bg-size: 60%;
+  }
+  &--2 {
+    --bg-size: 40%;
+  }
+  &--1 {
+    --bg-size: 20%;
+  }
+  &--0 {
+    --bg-size: 0%;
+  }
+}

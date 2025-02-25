@@ -3,10 +3,10 @@ export function initIMask() {
   if (typeof IMask === 'undefined') return;
 
   const telInputs = document.querySelectorAll('.input-tel');
-  const placeholder = '+7 (___) ___-__-__';
+  const placeholder = '+7';
   const maskOptions = {
     mask: '+{7} (000) 000-00-00',
-    lazy: false,
+    // lazy: false,
   };
 
   telInputs.forEach((input) => {

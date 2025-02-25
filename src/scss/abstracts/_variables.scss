@@ -9,11 +9,11 @@ $container-viewport-sizes: (
   // @media max-width when viewport < md
   // -0.02px to exclude 1px media-less zone
   // https://www.w3.org/TR/mediaqueries-4/#mq-min-max
-  'sm': 959.98px,
+  'sm': 767.98px,
   // @media min-width when viewport >= md
-  'md': 960px,
+  'md': 768px,
   // @media min-width when viewport >= lg
-  'lg': 1200px
+  'lg': 1500px
 );
 
 //! .container min-width, after which starts auto-scaling

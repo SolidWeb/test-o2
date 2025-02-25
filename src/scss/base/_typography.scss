@@ -15,23 +15,32 @@
 // 900 > Black (Heavy)
 
 $fonts: (
-  'Montserrat Regular': (
-    'family': 'Montserrat',
-    'filename': 'montserrat-regular',
-    'alias': 'montserrat',
+  'Inter Regular': (
+    'family': 'Inter',
+    'filename': 'inter-regular',
+    'alias': 'inter',
     'style': normal,
     'weight': 400,
     'serif': sans-serif,
     'root-var': '--font-regular',
   ),
-  'Montserrat Medium': (
-    'family': 'Montserrat',
-    'filename': 'montserrat-medium',
-    'alias': 'montserrat',
+  'Inter Medium': (
+    'family': 'Inter',
+    'filename': 'inter-medium',
+    'alias': 'inter',
     'style': normal,
     'weight': 500,
     'serif': sans-serif,
     'root-var': '--font-medium',
+  ),
+  'Inter SemiBold': (
+    'family': 'Inter',
+    'filename': 'inter-semibold',
+    'alias': 'inter',
+    'style': normal,
+    'weight': 600,
+    'serif': sans-serif,
+    'root-var': '--font-semibold',
   ),
 );
 
@@ -64,7 +73,7 @@ $font-names: map.keys($fonts);
 :root {
   //! General font variables goes here
   // Add a variable for each font if $separated-font-classes are being used
-  --font-montserrat: 'Montserrat', sans-serif;
+  --font-inter: 'Inter', sans-serif;
 
   @if $separated-font-vars {
     @each $font, $props in $fonts {
@@ -133,7 +142,7 @@ $font-names: map.keys($fonts);
     }
   } @else {
     //! List each font family here
-    font-family: var(--font-montserrat);
+    font-family: var(--font-inter);
   }
 }
 

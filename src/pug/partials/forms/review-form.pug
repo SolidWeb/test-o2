@@ -1,0 +1,42 @@
+//- prettier-ignore
++form([
+  { 
+    type: 'text',
+    idName: 'name',
+    label: 'Как вас зовут?',
+    placeholder: 'Иван Иванов',
+    required: true
+  }, 
+  { 
+    type: 'email',
+    idName: 'email',
+    label: 'E-mail',
+    placeholder: '@',
+  }, 
+  { 
+    type: 'tel',
+    idName: 'tel',
+    label: 'Контактный телефон',
+    placeholder: '+7',
+    value: '+7'
+  }, 
+  {
+    type: 'custom',
+    template: 'rate'
+  },
+  {
+    type: 'textarea',
+    idName: 'textarea',
+    label: 'Комментарий',
+    placeholder: 'Введите текст',
+    required: true
+  },
+    {
+    type: 'custom',
+    template: 'files'
+  },
+  {
+    type: 'submit',
+    submitText: 'Отправить'
+  }
+], 'sign-in')

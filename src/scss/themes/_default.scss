@@ -2,22 +2,25 @@
 
 :root {
   // Pure Colors
-  --color-primary: #670;
-  --color-primary-rgb: 102, 119, 0;
-  --color-secondary: #188;
-  --color-secondary-rgb: 17, 136, 136;
-  --color-accent: #808;
-  --color-blue: blue;
-  --color-red: red;
-  --color-grey-1: gainsboro;
-  --color-grey-2: grey;
-  --color-grey-3: darkgrey;
+  --color-orange: #ffb648;
+  --color-blue: #0d78ff;
+  --color-blue-hover: #0b68dd;
+  --color-blue-active: #0358c3;
+  --color-blue-light: #e6f3fd;
+  --color-red: #ea2828;
+  --color-gray-1: #464646;
+  --color-gray-2: #b1b1b1;
+  --color-gray-3: #e4e2e2;
+  --color-gray-4: #f6f6f6;
+  --color-gray-5: #f0f0f0;
+  --color-gray-6: #dadce0;
+  --color-dark: #1a1a1a;
   --color-black: black;
   --color-white: white;
 
   // UI Colors
   --html-bg-color: var(--color-white);
-  --text-body-color: var(--color-black);
+  --text-body-color: var(--color-gray-1);
   --tab-focus-color: var(--color-black);
   --content-link-color: var(--color-blue);
   --content-link-color-hover: var(--color-red);

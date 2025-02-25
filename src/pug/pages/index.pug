@@ -2,45 +2,53 @@ extends ../main.pug
 
 block globals
   - var pageUrl = 'index';
-  - var pageTitle = 'Главная страница';
+  - var pageTitle = 'Отзывы о товаре';
 
 block content
-  h1.h1 Главная страница
-  section.graphic-snippets-section
-    .graphic-snippets-section__item
-      h2.h2 Responsive picture set
-      .picture
-        +picture('starter/klim.jpg', 'Klim')
-    .graphic-snippets-section__item
-      h2.h2 SVG responsive picture set
-      .picture-svg
-        +pictureSVG('pictures/starter-logo.svg', 'Responsive svg', ['-lg', '-md', ''], ['960', '431', ''])
-    .graphic-snippets-section__item
-      h2.h2 CSS background picture set
-      .css-background-picture
-    .graphic-snippets-section__item
-      h2.h2 Plain image
-      .plain-img
-        +image('starter/ficus.png', 'Ficus')
-    .graphic-snippets-section__item
-      h2.h2 Inline SVG
-      .inline-svg-wrapper
-        +imageSVG('inline/starter-zara.svg', 'Zara')
-  hr.hr
-  .dropdown-demo
-    +dropdown('Clickable dropdown')
-      p test
-      p test
-      p test
-      p test
-    +dropdown('Hoverable dropdown', { buttonClass: 'link', hoverable: true })
-      p test
-      p test
-      p test
-      p test
-    //- ToDo: Select dropdown logic
-    +dropdown('Select dropdown', { buttonClass: 'link', select: true })
-      p test
-      p test
-      p test
-      p test
+  section
+    hgroup.hgroup
+      h1.h1 Отзывы о товаре (2)
+    .reviews-wrapper
+      .reviews
+        // Review
+        .review
+          header.review__header
+            time.date(datetime='2023-09-08') 08.09.2023
+            .rating.rating--4
+            span.h3 Балашова Татьяна
+          .content
+            p Отличное летнее платье с подкладкой, мне очень понравилось, но мне не подошло. покупала на 52 52ой, мало, на 48 или на 50 будет отлично.
+          .review__images
+            .review__image #[+picture('reviews/photo-01.jpg', 'Фото товара', [''])]
+            .review__image #[+picture('reviews/photo-02.jpg', 'Фото товара', [''])]
+
+          //..
+          .answer
+            header.answer__header
+              time.date(datetime='2023-09-08') 08.09.2023
+              span.h3 Ответ магазина:
+            .content
+              p Здравствуйте! Спасибо за Ваш отзыв! Мы очень рады, что Вы остались довольны сервисом и качеством товаров, представленных в нашем интернет-магазине! Надеемся увидеть Вас в числе наших постоянных клиентов!
+            span.answer__author С уважением, клиентский сервис интернет-магазина
+
+        hr
+
+        // Review
+        .review
+          header.review__header
+            time.date(datetime='2023-09-08') 08.09.2023
+            .rating.rating--4
+            span.h3 Иванова Елена
+          .content
+            p Отличное летнее платье с подкладкой, мне очень понравилось, но мне не подошло. покупала на 52 52ой, мало, на 48 или на 50 будет отлично.
+          .answer
+            header.answer__header
+              time.date(datetime='2023-09-08') 08.09.2023
+              span.h3 Ответ магазина:
+            .content
+              p Здравствуйте! Спасибо за Ваш отзыв! Мы очень рады, что Вы остались довольны сервисом и качеством товаров, представленных в нашем интернет-магазине! Надеемся увидеть Вас в числе наших постоянных клиентов!
+            span.answer__author С уважением, клиентский сервис интернет-магазина
+
+      .panel
+        h2.h2 Оставить свой отзыв
+        include @partials/forms/review-form.pug
