@@ -1,0 +1,60 @@
+/*! Dropdown component */
+
+@use '../abstracts' as *;
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-container {
+  --scrollbar-padding: 1rem;
+
+  position: absolute;
+  // Floating UI
+  top: 0;
+  left: 0;
+  z-index: 10;
+  display: none;
+  gap: 1.6rem;
+  min-width: 20rem;
+  width: 100%;
+  max-width: 30rem;
+  padding: 2rem calc(2rem - var(--scrollbar-padding)) 2rem 2rem;
+  border-radius: 2.4rem;
+  background-color: var(--color-white);
+  box-shadow: var(--shadow-menu);
+
+  &.is-visible {
+    display: flex;
+    animation: dropdown-container-appear 0.2s;
+  }
+}
+
+@keyframes dropdown-container-appear {
+  from {
+    transform: translateY(1rem);
+  }
+}
+
+.dropdown-content {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-height: 30rem;
+  padding-right: var(--scrollbar-padding);
+}
+
+/* Select dropdown */
+
+.dropdown-button--select {
+  &[aria-expanded='true'] {
+    .dropdown-button__arrow {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.dropdown-button__arrow {
+  margin-left: 0.5rem;
+  transition: transform var(--transition-medium-cubic);
+}

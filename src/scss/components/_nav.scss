@@ -1,0 +1,102 @@
+/*! Nav component rules */
+
+@use '../abstracts/' as *;
+
+.nav__list {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-left: 0;
+  @include bp(md) {
+    gap: 3rem;
+  }
+}
+
+.nav__item[data-dropdown] {
+  --container-offset: 1rem;
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  text-decoration: none;
+
+  .icon {
+    margin-left: 0.6rem;
+    font-size: 2.2rem;
+    transition: transform var(--transition-medium-cubic);
+  }
+}
+
+.sublist-toggler {
+  &--level-1 {
+    padding-bottom: var(--container-offset);
+    margin-bottom: calc(var(--container-offset) * -1);
+  }
+  &[aria-expanded='true'] .icon {
+    transform: rotate(180deg);
+  }
+  &:not(.sublist-toggler--level-1) {
+    // fix scrollbar when the icon is rotated
+    overflow: hidden;
+    width: 100%;
+    @include bp(md) {
+      .icon {
+        margin-left: auto;
+        transform: rotate(-90deg);
+      }
+      &[aria-expanded='true'] .icon {
+        transform: rotate(0deg);
+      }
+    }
+  }
+}
+
+.sublist-container {
+  --scrollbar-padding: 1rem;
+
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s linear;
+  @include bp(md) {
+    position: absolute;
+    // Floating UI
+    top: 0;
+    left: 0;
+    z-index: 10;
+    visibility: hidden;
+    width: max-content;
+    max-width: 30rem;
+    padding: 2rem calc(2rem - var(--scrollbar-padding)) 2rem 2rem;
+    border-radius: 2rem;
+    background-color: var(--color-white);
+    box-shadow: var(--shadow-menu);
+    transition: none;
+  }
+}
+
+.sublist-container.is-visible {
+  grid-template-rows: 1fr;
+  @include bp(md) {
+    visibility: visible;
+    animation: sublist-appear 0.2s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+}
+
+@keyframes sublist-appear {
+  0% {
+    opacity: 0;
+    transform: translateY(1rem);
+  }
+}
+
+.nav__sublist {
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-height: 30rem;
+  padding-right: var(--scrollbar-padding);
+}
