@@ -26,8 +26,6 @@ class FilesUploader extends BaseComponent {
     } else {
       this.filesField.classList.remove(isLoaded);
     }
-
-    console.log(filesArray);
   }
 
   createFilePreview(file) {
@@ -76,6 +74,8 @@ class FilesUploader extends BaseComponent {
 
     // Create previews only for the new unique files
     uniqueFiles.forEach((file) => this.createFilePreview(file));
+
+    this.filesInput.blur();
   }
 
   removeFile(file) {
