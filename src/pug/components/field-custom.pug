@@ -22,7 +22,7 @@ mixin fieldCustom(props)
           label(for='rate-star-1', aria-label='1 star') #[+icon('star')]
 
   if (props.template === 'files')
-    .files-container
+    .files-container(data-files-uploader)
       label.files-field
         input.input-file(
           type='file',

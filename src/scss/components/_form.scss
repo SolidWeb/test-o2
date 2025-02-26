@@ -403,4 +403,12 @@
   background-position: center;
   background-repeat: no-repeat;
   background-color: var(--color-dark-2);
+  transition: opacity var(--transition-medium-cubic);
+  &:hover,
+  &:focus-visible {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.6;
+  }
 }
