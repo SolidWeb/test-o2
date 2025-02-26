@@ -374,7 +374,6 @@
     height: 12rem;
     border-style: solid;
     border-color: blue;
-    background-image: none;
     @include bp(sm) {
       aspect-ratio: 9 / 12;
       width: 100%;
@@ -424,4 +423,12 @@
   &:active {
     opacity: 0.6;
   }
+}
+
+.files-container-wrapper:has(.error-field) .files-container {
+  border-color: var(--color-red);
+}
+
+.files-container-errors .error-label {
+  margin-top: 0.6rem;
 }

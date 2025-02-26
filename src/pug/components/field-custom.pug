@@ -22,13 +22,15 @@ mixin fieldCustom(props)
           label(for='rate-star-1', aria-label='1 star') #[+icon('star')]
 
   if (props.template === 'files')
-    .files-container(data-files-uploader)
-      label.files-field
-        input.input-file(
-          type='file',
-          name='review-files',
-          accept='.png, .jpg, .jpeg',
-          aria-label='Загрузить фотографии',
-          multiple
-        ) 
-        span.files-field__caption Загрузить фотографии. #[br.sm]Максимальный вес 10 мегабайт.&nbsp;#[br]Расширение jpeg, png
+    .files-container-wrapper
+      .files-container(data-files-uploader)
+        label.files-field
+          input.input-file(
+            type='file',
+            name='review-files',
+            accept='.png, .jpg, .jpeg',
+            aria-label='Загрузить фотографии',
+            multiple
+          ) 
+          span.files-field__caption Загрузить фотографии. #[br.sm]Максимальный вес 10 мегабайт.&nbsp;#[br]Расширение jpeg, png
+      .files-container-errors

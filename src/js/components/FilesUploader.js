@@ -1,6 +1,7 @@
 import BaseComponent from './BaseComponent';
 
 const uploaderSelector = '[data-files-uploader]';
+const maxFileSizeBytes = 10 * 1024 * 1024; // 10 MB
 
 class FilesUploader extends BaseComponent {
   stateClasses = {
@@ -62,11 +63,28 @@ class FilesUploader extends BaseComponent {
   addFiles(newFiles) {
     const { filesArray } = this.state;
 
-    // Filter out duplicate files
+    // Get the accepted file extensions from the `accept` attribute
+    const acceptedExtensions = this.filesInput.accept.split(',').map((ext) => ext.trim().toLowerCase());
+
+    // Filter out files
     const uniqueFiles = newFiles.filter((newFile) => {
-      return !filesArray.some(
+      const isAcceptedType = acceptedExtensions.some((ext) => newFile.name.toLowerCase().endsWith(ext));
+      const isDuplicate = filesArray.some(
         (existingFile) => existingFile.name === newFile.name && existingFile.type === newFile.type,
       );
+      const isWithinSizeLimit = newFile.size <= maxFileSizeBytes;
+
+      if (!isAcceptedType) {
+        alert(`Некорректный формат файла`);
+        return;
+      }
+
+      if (!isWithinSizeLimit) {
+        alert(`Превышен максимальный размер файла`);
+        return;
+      }
+
+      return !isDuplicate;
     });
 
     // Add unique files to filesArray
@@ -74,6 +92,13 @@ class FilesUploader extends BaseComponent {
 
     // Create previews only for the new unique files
     uniqueFiles.forEach((file) => this.createFilePreview(file));
+
+    // Update the input's files property to reflect only accepted files
+    const dataTransfer = new DataTransfer();
+    this.state.filesArray.forEach((file) => {
+      dataTransfer.items.add(file);
+    });
+    this.filesInput.files = dataTransfer.files;
 
     this.filesInput.blur();
   }
