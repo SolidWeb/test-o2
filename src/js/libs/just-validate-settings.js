@@ -86,28 +86,8 @@ export function initJustValidate() {
     });
 
     validator.onSuccess((e) => {
-      /* Redirect to the success page upon successful form submission */
-      // const rootLocation = 'https://domen.name';
-      // const successPage = 'success.html';
-      // window.location.href = rootLocation + successPage;
-      /* Complete form submission template */
-      // const xhr = new XMLHttpRequest();
-      // const formData = new FormData(form);
-      // xhr.open('POST', form.getAttribute('action'));
-      // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      // xhr.send(formData);
-      // xhr.onreadystatechange = function () {
-      //   const statusDialogSuccess = document.querySelector(
-      //     '.dialog[data-name="success"]'
-      //   );
-      //   // Form send successfully
-      //   if (this.readyState === 4 && this.status === 200) {
-      //     statusDialogSuccess.showModal();
-      //   }
-      // };
-      // xhr.onerror = function () {
-      //   // error
-      // };
+      /* Temporary solution */
+      form.classList.add('is-submitted');
     });
   });
 }

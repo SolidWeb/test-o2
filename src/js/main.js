@@ -6,62 +6,28 @@ import { initBrowserChecks, applyInitialSettings } from './utils/utils';
 initBrowserChecks();
 applyInitialSettings();
 
-/**
-  Form elements UX
-================ **/
-
-/* Autoresizible textarea */
-const textareaFields = document.querySelectorAll('.textarea-field');
-
-textareaFields.forEach((field) => {
-  const textarea = field.querySelector('.input-textarea');
-  const initialHeight = textarea.offsetHeight;
-  const initialOffset = initialHeight - textarea.clientHeight;
-
-  textarea.addEventListener('input', () => {
-    textarea.style.height = initialHeight + 'px';
-    textarea.style.height = textarea.closest('.dialog')
-      ? textarea.scrollHeight + initialOffset + 2 + 'px'
-      : textarea.scrollHeight + initialOffset + 'px';
-    // Fix clumsy textarea scroll
-    textarea.scrollTo(0, textarea.scrollHeight);
-  });
-});
-
-/* Show uploaded file name */
-const fileUploadFields = document.querySelectorAll('.file-field');
-
-fileUploadFields.forEach((field) => {
-  const input = field.querySelector('.input-file');
-  const label = field.querySelector('.label-file');
-  const labelText = label.textContent;
-
-  input.addEventListener('change', (e) => {
-    label.textContent = e.target.files.length > 0 ? e.target.files[0].name : labelText;
-  });
-});
-
-/* Password visibility toggler */
-const passwordTogglers = document.querySelectorAll('.password-toggler');
-
-passwordTogglers.forEach((toggler) => {
-  toggler.addEventListener('click', () => {
-    const input = toggler.nextSibling;
-    toggler.classList.toggle('is-active');
-    input.type = input.type === 'password' ? 'text' : 'password';
-  });
-});
-
 /* Files */
 const filesContainer = document.querySelector('.files-container');
 const filesField = document.querySelector('.files-field');
 const filesInput = document.querySelector('.input-file[multiple]');
+let filesArray = [];
 
 filesInput.addEventListener('change', (e) => {
   if (e.target.files.length > 0) {
     filesField.classList.add('file-is-loaded');
 
-    Array.from(e.target.files).forEach((file) => {
+    const newFiles = Array.from(e.target.files);
+    const uniqueFiles = newFiles.filter((newFile) => {
+      return !filesArray.some(
+        (existingFile) => existingFile.name === newFile.name && existingFile.type === newFile.type,
+      );
+    });
+
+    filesArray = filesArray.concat(uniqueFiles);
+
+    console.log(filesArray);
+
+    uniqueFiles.forEach((file) => {
       const reader = new FileReader();
 
       reader.onload = function (event) {
@@ -79,7 +45,20 @@ filesInput.addEventListener('change', (e) => {
 
         fileRemove.addEventListener('click', () => {
           filesContainer.removeChild(fileContainer);
-          if (filesContainer.children.length === 0) {
+
+          const fileIndex = filesArray.indexOf(file);
+          if (fileIndex !== -1) {
+            filesArray.splice(fileIndex, 1);
+          }
+
+          const dataTransfer = new DataTransfer();
+          filesArray.forEach((file) => {
+            dataTransfer.items.add(file);
+          });
+
+          filesInput.files = dataTransfer.files;
+
+          if (filesArray.length === 0) {
             filesField.classList.remove('file-is-loaded');
           }
         });
@@ -88,17 +67,9 @@ filesInput.addEventListener('change', (e) => {
         fileContainer.appendChild(fileRemove);
         filesContainer.appendChild(fileContainer);
       };
+
       reader.readAsDataURL(file);
     });
-    // const reader = new FileReader();
-    // reader.onload = function () {
-
-    //   filePreview.src = reader.result;
-    //   filesContainer.appendChild(fileContainer);
-    //   fileContainer.appendChild(filePreview);
-    //   fileContainer.appendChild(fileRemove);
-    // };
-    // reader.readAsDataURL(e.target.files[0]);
   }
 });
 

@@ -9,10 +9,10 @@
 .dropdown-content {
   --track-width: 0.5rem;
   --track-vertical-offset: 0;
-  --track-color: var(--color-grey-1);
+  --track-color: var(--color-gray-5);
   --thumb-width: 0.5rem;
-  --thumb-color: var(--color-grey-2);
-  --thumb-hover-color: var(--color-grey-3);
+  --thumb-color: var(--color-gray-2);
+  --thumb-hover-color: var(--color-gray-1);
 
   &::-webkit-scrollbar {
     width: var(--track-width);

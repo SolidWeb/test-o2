@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: 3rem;
-  @include bp-min(1280px) {
+  @include bp-min(960px) {
     flex-direction: row;
   }
 }
@@ -90,15 +90,62 @@
 /* Review form */
 
 .panel {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 3rem;
   padding: 3rem;
   border-radius: 1rem;
   background-color: var(--color-gray-5);
-  @include bp-min(1280px) {
+  @include bp-min(960px) {
     align-self: flex-start;
     width: 100%;
     max-width: 46rem;
   }
+  .h2 {
+    transform: opacity var(--transition-medium-cubic);
+  }
+  &:has(.review-form.is-submitted) {
+    & > .h2 {
+      opacity: 0;
+    }
+  }
+}
+
+.review-form {
+  transition:
+    transform var(--transition-medium-cubic),
+    opacity var(--transition-medium-cubic);
+  &.is-submitted {
+    opacity: 0;
+    transform: translateX(calc(-100% - 5rem));
+
+    & + .success-message {
+      visibility: visible;
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+}
+
+.success-message {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(calc(100% + 5rem));
+  transition:
+    transform var(--transition-medium-cubic),
+    opacity var(--transition-medium-cubic);
+  pointer-events: none;
 }
